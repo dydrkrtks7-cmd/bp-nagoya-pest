@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HONGDAE NIGHT TRANSIT - 장르별 최적화된 클럽 선택 가이드</title>
+    <meta name="description" content="단순한 추천을 넘어 데이터 기반으로 분석된 홍대 클럽 방문 가이드입니다. 음악 스타일과 선호 분위기에 맞춘 선택지 및 시간대별 혼잡도 정보를 제공합니다.">
+    <meta name="keywords" content="홍대 클럽 정보, 장르별 클럽 비교, 홍대 파티 준비, 최적의 노드 선정, nightlife data">
+    <link rel="canonical" href="https://hongdaenighttransit.kr/club-guide/">
+    
+    <!-- Social / SEO Meta -->
+    <meta property="og:title" content="HONGDAE NIGHT TRANSIT | 장르별 최적화 가이드">
+    <meta property="og:description" content="단순 추천이 아닌 데이터에 기반한 장르별 클럽 선택 및 방문 전략을 제시합니다.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- CSS Core & Design System -->
+    <style>
+        :root {
+            --bg-color: #F5F5F7;
+            --text-primary: #1D1D1F;
+            --text-secondary: #86868B;
+            --accent-color: #0071E3;
+            --card-bg: #FFFFFF;
+            --border-radius: 12px;
+            --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            --spacing-unit: 16px;
+            --container-width: 960px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Layout System */
+        .wrapper { display: flex; min-height: 100vh; max-width: 100%; }
+        
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E5E5EA;
+            z-index: 100;
+            padding: var(--spacing-unit) 0;
+        }
+
+        .nav-container { max-width: var(--container-width); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        
+        .brand-title { font-weight: 800; font-size: 1.25rem; color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px; cursor: pointer; }
+        
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; transition: color 0.3s ease; cursor: pointer; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-color); font-weight: 600; }
+
+        .mobile-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 5px; }
+        .mobile-toggle span { width: 20px; height: 2px; background-color: var(--text-primary); }
+
+        main { margin-top: 80px; flex: 1; padding: 40px 20px; max-width: var(--container-width); margin-left: auto; margin-right: auto; width: 100%; }
+        
+        /* Typography & Components */
+        h1, h2, h3 { font-weight: 700; color: var(--text-primary); line-height: 1.3; letter-spacing: -0.5px; }
+        h1 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 24px; }
+        h2 { font-size: 1.75rem; margin-top: 48px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #E5E5EA; }
+        
+        p { color: var(--text-secondary); margin-bottom: 16px; font-size: 1.05rem; }
+
+        .hero-intro { margin-bottom: 48px; max-width: 720px; background-color: #fff; padding: 32px; border-radius: var(--border-radius); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 60px; }
+        
+        .data-card { background: var(--card-bg); padding: 32px; border-radius: var(--border-radius); border-left: 4px solid var(--accent-color); box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s ease; }
+        .data-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
+        
+        .card-title { font-size: 1.25rem; margin-bottom: 12px; color: var(--text-primary); display: flex; align-items: center; justify-content: space-between; }
+        .sub-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); background: #F5F5F7; padding: 4px 8px; border-radius: 6px; margin-left: 12px; }
+        
+        .check-list { list-style: none; counter-reset: item-counter; }
+        .check-list li { position: relative; padding-left: 30px; margin-bottom: 12px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        
+        .check-list li::before { counter-increment: item-counter; content: counter(item-counter) "."; position: absolute; left: 0; top: 2px; color: var(--accent-color); font-weight: bold; font-size: 0.9rem; }
+
+        /* FAQ Section */
+        .faq-section { background: #fff; padding: 48px; border-radius: var(--border-radius); margin-top: 60px; }
+        .faq-item { border-bottom: 1px solid #E5E5EA; padding: 20px 0; }
+        .faq-question { font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; color: var(--text-primary); }
+        .faq-answer { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; padding-left: 20px; border-left: 3px solid #E5E5EA; display: none; margin-bottom: 8px; }
+        .faq-item.open .faq-answer { display: block; animation: fadeIn 0.4s ease; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Footer */
+        footer { background-color: #F5F5F7; padding: 48px 20px; text-align: center; border-top: 1px solid #E5E5EA; margin-top: 60px; color: var(--text-secondary); font-size: 0.9rem; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; flex-direction: column; padding: 24px; gap: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; animation: slideDown 0.3s ease; }
+            .mobile-toggle { display: flex; }
+        }
+
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="brand-title">NIGHT TRANSIT MAP</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">홈</a></li>
+                <li><a href="#" class="active">클럽 추천정보</a></li>
+                <li><a href="#">바 & 로우패스</a></li>
+                <li><a href="#">이동 노선도</a></li>
+            </ul>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <header style="margin-bottom: 60px;">
+            <h1 style="font-size: clamp(2rem, 5vw, 3rem); line-height: 1.2; margin-bottom: 24px;">홍대의 밤, 당신의 플레이리스트를 위한 최적의 춤추는 공간 찾기</h1>
+        </header>
+
+        <div class="hero-intro">
+            <p>수많은 불빛과 음악이 교차하는 홍대의 밤. 어디로 발걸음을 옮겨야 할지 망설이는 당신을 위해, HONGDAE NIGHT TRANSIT는 단순한 정보 나열을 넘어 데이터에 기반한 섬세한 클럽 가이드라인을 제시합니다. 당신의 취향, 그날의 기분, 함께하는 사람들의 에너지까지 고려하여 최고의 경험을 선사할 장소를 찾아 떠나는 여정, 지금 시작합니다.</p>
+            <p>우리의 목표는 명확합니다. 당신이 홍대라는 거대한 밤의 지도를 헤매지 않고, 당신의 심장을 뛰게 할 음악과 분위기가 있는 곳을 정확히 찾아갈 수 있도록 돕는 것입니다. 마치 큐레이터처럼, 홍대의 다채로운 밤 문화를 세심하게 분석하고, 당신의 밤을 더욱 특별하게 만들어 줄 숨겨진 보석 같은 클럽들을 발굴하여 소개합니다. 이제, 당신의 완벽한 홍대 나이트라이프를 위한 항해를 시작할 시간입니다.</p>
+        </div>
+
+        <section>
+            <h2>장르별 완벽한 믹스: 당신의 귀를 사로잡을 사운드</h2>
+            <p>홍대의 밤은 다채로운 음악의 향연입니다. 힙합의 강렬한 비트부터 EDM의 황홀한 멜로디, 그리고 펑크(Funk)나 디스코(Disco)의 흥겨운 리듬까지, 각기 다른 장르가 저마다의 색깔로 밤을 수놓습니다. HONGDAE NIGHT TRANSIT는 이러한 음악적 스펙트럼을 면밀히 분석하여, 당신의 취향에 완벽하게 부합하는 클럽을 추천합니다. 단순히 '힙합 클럽'이라고 뭉뚱그리지 않고, 트렌디한 붐뱁(Boom Bap)을 주로 틀어주는 곳인지, 아니면 갱스터 랩(Gangster Rap)이나 트랩(Trap) 등 특정 서브 장르에 특화된 곳인지까지 세밀하게 구분하여 정보를 제공합니다. EDM 역시 프로그레시브 하우스(Progressive House)와 테크노(Techno), 퓨처 베이스(Future Bass) 등 세분화된 장르별 특성과 해당 장르를 즐기기 좋은 클럽의 특징을 함께 설명합니다. 이로써 당신은 마치 전문 DJ의 플레이리스트를 따라가듯, 당신의 음악적 갈증을 해소해 줄 완벽한 공간을 쉽게 발견할 수 있을 것입니다.</p>
+            <p>음악은 단순한 배경이 아닙니다. 그것은 밤의 분위기를 지배하고, 사람들의 감정을 고조시키며, 잊지 못할 순간을 마ᅡᆫ드는 핵심 요소입니다. 저희는 각 클럽의 DJ 라인업, 플레이되는 곡의 평균적인 BPM, 그리고 음악적 큐레이션의 독창성까지 고려하여 데이터를 수집하고 분석합니다. 당신이 격렬한 댄스 플로어에서 에너지를 발산하고 싶든, 혹은 편안한 분위기에서 세련된 음악을 감상하고 싶든, HONGDAE NIGHT TRANSIT는 당신이 원하는 사운드를 정확히 찾아갈 수 있도록 돕는 나침반이 되어줄 것입니다. 홍대의 밤은 당신의 취향을 위한 무한한 가능성으로 가득 차 있으며, 우리는 그 가능성을 현실로 만들어 드립니다.</p>
+        </section>
+
+<!-- SEO Visual 2: 클럽 Cardless Editorial List -->
+<div class="seo-visual-cards" role="img" aria-label="홍대 클럽 추천정보 클럽 — 강남 클럽 정보" 
+     style="display:flex;flex-direction:column;gap:0;margin:40px 0;border-top:1px solid #e5e5e0;border-bottom:1px solid #e5e5e0;background:#faf9f6">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:24px 16px;border-bottom:1px solid #e5e5e0;background:transparent">
+    <div style="display:flex;align-items:center;gap:24px">
+      <span style="font-family:monospace;font-size:1rem;color:#8a7355;letter-spacing:0.05em;font-weight:500">[ 01 ]</span>
+      <span style="font-family:serif;font-weight:400;font-size:1.2rem;color:#1c1c1e;letter-spacing:-0.02em">특화</span>
+    </div>
+    <span style="font-family:sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a7355;font-weight:600">홍대 클럽 추천정보</span>
+  </div><div style="display:flex;align-items:center;justify-content:space-between;padding:24px 16px;border-bottom:1px solid #e5e5e0;background:transparent">
+    <div style="display:flex;align-items:center;gap:24px">
+      <span style="font-family:monospace;font-size:1rem;color:#8a7355;letter-spacing:0.05em;font-weight:500">[ 02 ]</span>
+      <span style="font-family:serif;font-weight:400;font-size:1.2rem;color:#1c1c1e;letter-spacing:-0.02em">다수 실적</span>
+    </div>
+    <span style="font-family:sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a7355;font-weight:600">홍대 클럽 추천정보</span>
+  </div><div style="display:flex;align-items:center;justify-content:space-between;padding:24px 16px;border-bottom:none;background:transparent">
+    <div style="display:flex;align-items:center;gap:24px">
+      <span style="font-family:monospace;font-size:1rem;color:#8a7355;letter-spacing:0.05em;font-weight:500">[ 03 ]</span>
+      <span style="font-family:serif;font-weight:400;font-size:1.2rem;color:#1c1c1e;letter-spacing:-0.02em">고품질</span>
+    </div>
+    <span style="font-family:sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a7355;font-weight:600">홍대 클럽 추천정보</span>
+  </div>
+</div>
+
+        <section class="info-grid">
+            <div class="data-card">
+                <h3 class="card-title">
+                    힙합 & R&B 
+                    <span class="sub-label">붐뱁 | 트랩 | 소울</span>
+                </h3>
+                <ul class="check-list">
+                    <li>강렬한 비트와 에너지를 원한다면</li>
+                    <li>최신 힙합 트렌드를 즐기고 싶다면</li>
+                    <li>깊고 감미로운 R&B 사운드에 몸을 맡기고 싶다면</li>
+                    <li>자유롭고 캐주얼하ᅡᆫ 분위기를 선호한다면</li>
+                </ul>
+            </div>
+
+            <div class="data-card">
+                <h3 class="card-title">
+                    EDM & 댄스 
+                    <span class="sub-label">하우스 | 테크노 | 퓨처베이스</span>
+                </h3>
+                <ul class="check-list">
+                    <li>화려한 조명과 웅장한 사운드를 경험하고 싶다면</li>
+                    <li>세계적인 DJ들의 퍼포먼스를 느껴보고ᅩ 싶다면</li>
+                    <li>장르별 특화된 클럽에서 깊이 있는 음악을 탐구하고 싶다면</li>
+                    <li>떼창과 군무를 즐기는 열정적인 분위기를 원한다면</li>
+                </ul>
+            </div>
+
+            <div class="data-card">
+                <h3 class="card-title">
+                    라이브 & 밴드 
+                    <span class="sub-label">인디 | 록 | 재즈</span>
+                </h3>
+                <ul class="check-list">
+                    <li>실시간 연주의 생동감을 느끼고 싶다면</li>
+                    <li>개성 넘치는 인디 밴드들의 음악을 발견하고 싶다면</li>
+                    <li>클래시ᄈ한 록 사운드나 재즈의 깊이를 즐기고 싶다면</li>
+                    <li>앉아서 편안하게 음악을 감상하는 것을 선호한다면</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>분위기 메이커: 당신의 밤을 완성하는 공간</h2>
+            <p>음악만큼이나 중요한 것이 바로 클럽의 '분위기'입니다. 어떤 곳은 빈티지한 인테리어와 아늑한 조명으로 편안함을 선사하고, 다른 곳은 최첨단 디자인과 화려한 조명 쇼로 압도적인 에너지를 뿜어냅니다. HONGDAE NIGHT TRANSIT는 이러한 공간의 특징을 상세히 분석하여, 다ᅡᆼ신이 어떤 분위기를 선호하는지에 따라 최적의 장소를 추천합니다. 격식을 갖춘 칵테일 바와 같은 세련된 분위기를 원하시나요? 아니면 친구들과 편하게 어울릴 수 있는 캐주얼한 펍 스타일의 공간을 찾으시나요? 혹시 특별한 날을 기념하기 위한 프라이빗한 공간이나, 춤추기 좋은 넓은 댄스 플로어를 가진 곳을 찾고 계신가요? 저희는 각 클럽의 수용 인원, 테이블 배치, 조명 및 음향 사스템, 심지어는 드레스 코드(만약 있다면)까지 고려하여 당신의 선택을 돕습니다. 단순히 '핫플레이스'라는 타이틀만 쫓기보다, 당신의 밤을 더욱 특별하고 의미 있게 만들어 줄 공간을 찾도록 안내합니다.</p>
+            <p>또한, 클럽의 '사람들' 역시 분위기를 결정짓는 중요한 요소입니다. 어떤 클럽은 특정 연령층이나 관심사를 가진 사람들로 북적이며, 이는 독특한 커뮤니티를 횽성하기도 합니다. 저희는 이러한 군중의 특성, 즉 주로 어떤 사람들이 방문하는지, 그들의 평균적인 연령대는 어떤지, 그리고 어떤 목적으로 클럽을 찾는지 등에 대한 인사이트를 제공합니다. 이는 당신이 자신과 잘 맞는 사람들과 교류하고, 더욱 즐거운 시간을 보낼 수 있도록 돕는 귀중한 정보가 ᄃ될 것입니다. 홍대의 밤은 당신의 스타일과 에너지를 공유할 수 있는 사람들과의 만남으로 가득합니다. HONGDAE NIGHT TRANSIT와 함께라면, 당신은 당신의 밤을 더욱 풍성하게 만들어 줄 사람들과의 연결고리를 찾을 수 있습니다.</p>
+        </section>
+
+        <section class="faq-section">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>가장 붐비는 시간대는 언제인가요?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>일반적으로 홍대 클럽은 금요일과 토요ᅭ일 밤, 특히 자정 이후부터 새벽 2-3시 사이에 가장 붐빕니다. 평일에도 특별 이벤트가 있거나 특정 요일에 따라 혼잡도가 달라질 수 있습니다. HONGDAE NIGHT TRANSIT는 각 클럽별 시간대별 예상 혼잡도 정보를 제공하여, 당신의 방문 계획에 도움을 줄 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>입장료는 보통 얼마인가요?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>입장료는 클럽의 규모, 위치, 요일, 그리고 제공되는 서비스(음료 포함 여부 등)에 따라 크게 다릅니다. 일반적으로 주말에는 1만원에서 3간원 사이의 입장료가 부과되는 경우가 많으며, 특별 이벤트나 유명 DJ가 출연하는 날에는 더 높아질 수 있습니다. 일부 클럽은 특정 시간대 이전 입장 시 무료이거나 할인 혜택을 제공하기도 합니다.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>어떤 종류의 복장을 입어야 하나요?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>대부분의 홍대 클럽은 비교적 자유로운 분위기이지만, 지나치게 편안한 복장(트레이닝복, 슬리퍼 등)은 입장이 거부될 수 있습니다. 힙합ᆸ, EDM 클럽의 경우 캐주얼하면서도 스타일리시한 복장이 잘 어울리며, 라이브 공연장이나 좀 더ᅥ 고급스러운 분위기의 클럽은 세미 정장이나 스마트 캐주얼을 추천합니다. 클럽별 상세 복장 규정은 HONGDAE NIGHT TRANSIT에서 확인하실 수 있습니다.</p>
+                </div>
+            </div>
+             <div class="faq-item">
+                <div class="faq-question">
+                    <span>혼자 방문해도 괜찮을까요?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>네, 물론입니다! 홍대 클럽 중에는 혼자 방문하여 새로운 사람들을 만나고 으ᅳᆷ악을 즐기기에 좋은 곳들이 많습니다. 특히 바(Bar) 형태의 클럽이나 특정 장르를 공유하는 사람들과 자연스럽게 어울릴 수 있는 분위기의 장소들이 혼자 방문하기에 적합합니다. 저희 가이드에서 '솔로 방문 추천' 태그가 붙은 곳들을 참ᆷ고하시면 더욱 좋습니다.</p>
+                </div>
+            </div>
+        
+<div class="seo-visual-divider" role="separator" aria-label="홍대 클럽 추천정보 구분선" style="margin:32px 0;text-align:center;color:#e5e5e0;font-size:0.85rem;letter-spacing:0.5em">◆ ◆ ◆</div>
+</section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 HONGDAE NIGHT TRANSIT. All rights reserved.</p>
+        <p>홍대의 밤, 당신의 완벽한 순간을 위한 데이터 기반 가이드</p>
+    </footer>
+</div>
+
+<script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    mobileToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            item.classList.toggle('open');
+            const plusMinus = question.querySelector('span:last-child');
+            if (item.classList.contains('open')) {
+                plusMinus.textContent = '-';
+            } else {
+                plusMinus.textContent = '+';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
