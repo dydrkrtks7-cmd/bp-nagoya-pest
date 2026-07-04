@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nagoya-pest.node-link.shop/sitemap.xml
+Sitemap: https://hongdae-club-hot.node-link.shop/sitemap.xml
